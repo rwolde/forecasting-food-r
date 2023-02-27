@@ -62,5 +62,7 @@ ggplot(data, aes(x=x, y=y)) +
    geom_point(color="blue") +
    labs(title="title", x="X Axis", y="Y Axis")
 ```
-   
+ggploy(data, aes(x=x, y=y)) +
+  geom_point(color="blue") +
+  labs(title="title", x="X axis", y="Y Axis")
 
