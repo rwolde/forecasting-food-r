@@ -24,7 +24,7 @@ data <- data.frame(
    value = c(20, 30, 15)
 )
 ```
-
+## bar graph is trying to show changes and compares foods together
 
 ``` {r bar graph, echo=FALSE}
 library(ggplot2)
@@ -39,6 +39,7 @@ data <- data.frame(
    sales = c(100, 120, 150, 180, 200, 220)
 )
 
+## Overall increase in food in general seperate year/decade etc
 ``` {r line graph, echo=FALSE}
 library(ggplot2)
 
@@ -52,6 +53,7 @@ data <- data.frame(
    y = c(10, 8, 6, 4, 2, 0)
 )
 
+##Overall increase in food and we can try to highlight foods on plot
 
 ``` {r point graph, echo=FALSE}
 library(ggplot2)
