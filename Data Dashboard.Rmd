@@ -28,7 +28,7 @@ data <- data.frame(
 
 ``` 
 library(ggplot2)
-#commit
+#commit test
 ggplot(data, aes(x=category, y=value)) +
    geom_bar(stat="identity", fill="steelblue") +
    labs(title="title", x="Category", y="Value")
