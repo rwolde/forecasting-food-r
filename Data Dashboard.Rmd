@@ -20,6 +20,10 @@ CPIHistoricalData <- read_excel("historicalcpi.xlsx",
 
 ## bar graph is trying to show changes and compares foods together
 
+## if you want our latest work save , commit and then pull (fix conflicts if present) 
+
+##if you want to share work save , commit , pull (fix conflicts if present) and then push
+
 ``` {r bar graph, echo=FALSE}
  library(ggplot2)
 
