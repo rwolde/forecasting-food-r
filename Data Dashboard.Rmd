@@ -17,16 +17,6 @@ CPIForecastData <- read_excel("CPIForecast.xlsx",
 CPIHistoricalData <- read_excel("historicalcpi.xlsx", 
                                 skip = 1)
 ```
-<<<<<<< HEAD
-
-```
-data <- data.frame(
-   category = c("Category 1", "Category 2", "Category 3"),
-    value = c(20, 30, 15)
- )
-```
-=======
->>>>>>> 2f8f2b1de9d143cfc45d770100440d51f7a7f0f5
 
 ## bar graph is trying to show changes and compares foods together
 
