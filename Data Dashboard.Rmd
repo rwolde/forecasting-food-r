@@ -16,6 +16,7 @@ CPIForecastData <- read_excel("CPIForecast.xlsx",
 CPIHistoricalData <- read_excel("historicalcpi.xlsx", 
                                 skip = 1)
 ```
+
 ```
 data <- data.frame(
    category = c("Category 1", "Category 2", "Category 3"),
@@ -58,3 +59,20 @@ ggplot(data, aes(x=x, y=y)) +
    geom_point(color="blue") +
    labs(title="title", x="X Axis", y="Y Axis")
 ```
+
+``` {r point graph}
+
+p <- ggplot(data = CPIHistoricalData,
+            mapping = aes(x = Food,
+                          y = Price))
+                          
+p + geom_point(mapping = aes(color = continent,
+                          fill = continent)) +
+  geom_smooth(method = "loess") +
+  scale_x_log10(labels = scales::dollar) +
+  labs(x = "Food...", 
+       y = "Price", 
+       title = "Food price change over ... years",
+       caption = "Source: Gapmindcer.")
+```
+
