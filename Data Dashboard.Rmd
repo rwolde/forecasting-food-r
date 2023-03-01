@@ -29,7 +29,6 @@ data <- data.frame(
 >>>>>>> 2f8f2b1de9d143cfc45d770100440d51f7a7f0f5
 
 ## bar graph is trying to show changes and compares foods together
-CPIHistoricalData$1974
 
 ``` {r bar graph, echo=FALSE}
  library(ggplot2)
