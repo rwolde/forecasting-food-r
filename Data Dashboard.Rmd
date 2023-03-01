@@ -6,9 +6,10 @@ output: html_document
 runtime: shiny
 ---
 ```{r setup, include=FALSE}
-
 knitr::opts_chunk$set(echo = TRUE)
+install.packages("tidyverse")
 ```
+
 ```{r load data, include=FALSE}
 library(readxl)
 CPIForecastData <- read_excel("CPIForecast.xlsx",
