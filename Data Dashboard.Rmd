@@ -32,7 +32,7 @@ CPIHistoricalData <- read_excel("historicalcpi.xlsx",
 
 CPIForecastData_cropped <- head(CPIForecastData, 27)
 
-# Replace non-numeric values with missing values in the "Annual 2022" column
+# Replace non-numeric values with missing values in the "Annual 2022" and Consumer Price Index item" column
 
 CPIForecastData_cropped$`Annual 2022` <- ifelse(grepl("[^0-9.]+", CPIForecastData_cropped$`Annual 2022`),
                                         NA,
