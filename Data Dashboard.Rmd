@@ -30,9 +30,26 @@ CPIHistoricalData <- read_excel("historicalcpi.xlsx",
 
   library(ggplot2)
 
-ggplot(data = CPIForecast.xlsx, aes(x=category, y=value)) +
-   geom_bar(stat="identity", fill="steelblue") +
-   labs(title="title", x="Category", y="Value")
+CPIForecastData_cropped <- head(CPIForecastData, 27)
+
+# Replace non-numeric values with missing values in the "Annual 2022" column
+
+CPIForecastData_cropped$`Annual 2022` <- ifelse(grepl("[^0-9.]+", CPIForecastData_cropped$`Annual 2022`),
+                                        NA,
+                                        as.numeric(gsub("[^0-9.]+", "", CPIForecastData$`Annual 2022`)))
+
+### Subset the data to remove rows with missing values in the "Annual 2022" and "Consumer Price Index item" column
+
+CPIForecastData_complete <- CPIForecastData_cropped[complete.cases(CPIForecastData_cropped$`Annual 2022`), ]
+CPIForecastData_complete <- CPIForecastData_cropped[complete.cases(CPIForecastData_cropped$`Consumer Price Index item`), ]
+
+### Bar graph for 2022 Forecast Data
+
+ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`Annual 2022`)) +
+  geom_bar(stat="identity", fill="steel blue") +
+  labs(title="2022 Forecasted percent change of food prices", x="Food Item", y="Percent change") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ```
 
 ## Overall increase in food in general seperate year/decade etc
@@ -56,8 +73,8 @@ ggplot(CPIHistoricalData, aes(x=x, y=y)) +
 ``` {r point graph}
 
 p <- ggplot(data = CPIHistoricalData,
-            mapping = aes(x = "Food",
-                          y = "Consumer Price Index Item"))
+            mapping = aes(x = 1974,
+                          y = 1974))
                           
 p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
                           fill = "continent")) +
