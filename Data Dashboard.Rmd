@@ -54,28 +54,8 @@ ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`An
 ```
 
 ## Overall increase in food in general seperate year/decade etc
-``` {r line graph, echo=FALSE}
-
-library(ggplot2)
-library(xlsx)
-
-# Read the Excel file into R
-CPIHistoricalData <- read.xlsx("CPIHistorical.xlsx", sheetIndex = 1)
-
-# Plot a line graph
-ggplot(CPIHistoricalData, aes(x=year, y=sales)) +
-  geom_line(color="red") +
-  labs(title="title", x="Year", y="Sales")
-```
 
 ##Overall increase in food and we can try to highlight foods on plot
-
-``` {r point graph, echo=FALSE}
- library(ggplot2)
-ggplot(CPIHistoricalData, aes(x=x, y=y)) +
-   geom_point(color="blue") +
-   labs(title="title", x="X Axis", y="Y Axis")
-```
 
 ``` {r point graph}
 
@@ -96,26 +76,32 @@ p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
 
 library(plotly)
 library(readxl)
+library(tidyr)
+
 
 # Read in CPI data
-CPIHistoricalData <- read_excel("historicalcpi.xlsx")
+CPIHistoricalData <- read_excel("historicalcpi.xlsx", skip = 1)
 
 # Subset the data to only include meat, eggs, and chicken
-meat_eggs_chicken <- CPIHistoricalData[CPIHistoricalData$`Annual percent changes in selected Consumer Price Indexes, 1974 through 2021` %in% c("Beef and veal", "Eggs", "Pork"),]
+meat_eggs_pork <- CPIHistoricalData[CPIHistoricalData$`Consumer Price Index item` %in% c("Beef and veal", "Eggs", "Pork"),]
+
+# Transform the data into long format
+meat_eggs_pork <- gather(meat_eggs_pork, key = "Year", value = "Price_Index", -c(`Consumer Price Index item`))
+
+meat_eggs_pork$Price_Index <- as.numeric(meat_eggs_pork$Price_Index)
+
+meat_eggs_pork <- meat_eggs_pork[meat_eggs_pork$Year >= 2000 & meat_eggs_pork$Year <= 2010,]
+
+
 
 # Create plotly object
-p <- plot_ly(x = ~Year, type = "line") 
-
-# Add traces for each item
-p <- add_trace(p, y = ~meat_eggs_chicken[meat_eggs_chicken$Item == "Beef and veal", "Price_Index"], name = "Beef and veal", mode = "lines+markers")
-p <- add_trace(p, y = ~meat_eggs_chicken[meat_eggs_chicken$Item == "Eggs", "Price_Index"], name = "Eggs", mode = "lines+markers")
-p <- add_trace(p, y = ~meat_eggs_chicken[meat_eggs_chicken$Item == "Pork", "Price_Index"], name = "Pork", mode = "lines+markers")
+p <- plot_ly(data = meat_eggs_pork, x = ~Year, y = ~Price_Index, color = ~`Consumer Price Index item`, type = "scatter", mode = "lines+markers") 
 
 # Customize layout
-p <- layout(p, title = "CPI for Meat, Eggs, and Pork", 
-            xaxis = list(title = "Item", tickvals = c(2010, 2012, 2014, 2016, 2018, 2020), 
-                         ticktext = c("Beef and Veal", "Eggs", "Pork")), 
+p <- layout(p, title = "CPI for Meat, Eggs, and Chicken", 
+            xaxis = list(title = "Year"), 
             yaxis = list(title = "Price Index"))
+
 
 # Display plot
 p
