@@ -9,6 +9,7 @@ runtime: shiny
 knitr::opts_chunk$set(echo = TRUE)
 install.packages("tidyverse")
 install.packages("xlsx")
+install.packages("readxl")
 ```
 
 ```{r load data, include=FALSE}
@@ -91,28 +92,33 @@ p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
        caption = "Source: CPIForecastData")
 ```
 
-```{Interactice data}
-inputPanel(
-  selectInput("year_range", label = "Year range:",
-              choices = unique(CPIHistoricalData$year), selected = c(min(CPIHistoricalData$year), max(CPIHistoricalData$year)), multiple = TRUE)
-)
+``` {interactive line graph}
 
-renderPlot({
-  CPIHistoricalData %>%
-    filter(year %in% input$year_range) %>%
-    ggplot(aes(x = year, y = sales)) +
-    geom_line(color = "blue") +
-    labs(x = NULL, y = NULL,
-        title = "Sales over time",
-        subtitle = paste0("Data from ", min(CPIHistoricalData$year), " to ", max(CPIHistoricalData$year))) +
-    theme_minimal()
-})
+library(plotly)
+library(readxl)
 
-renderDataTable({
-  CPIHistoricalData %>%
-    filter(year %in% input$year_range) %>%
-    select(year, sales) %>%
-    arrange(desc(year))
-})
+# Read in CPI data
+CPIHistoricalData <- read_excel("historicalcpi.xlsx")
+
+# Subset the data to only include meat, eggs, and chicken
+meat_eggs_chicken <- CPIHistoricalData[CPIHistoricalData$`Annual percent changes in selected Consumer Price Indexes, 1974 through 2021` %in% c("Beef and veal", "Eggs", "Pork"),]
+
+# Create plotly object
+p <- plot_ly(x = ~Year, type = "line") 
+
+# Add traces for each item
+p <- add_trace(p, y = ~meat_eggs_chicken[meat_eggs_chicken$Item == "Beef and veal", "Price_Index"], name = "Beef and veal", mode = "lines+markers")
+p <- add_trace(p, y = ~meat_eggs_chicken[meat_eggs_chicken$Item == "Eggs", "Price_Index"], name = "Eggs", mode = "lines+markers")
+p <- add_trace(p, y = ~meat_eggs_chicken[meat_eggs_chicken$Item == "Pork", "Price_Index"], name = "Pork", mode = "lines+markers")
+
+# Customize layout
+p <- layout(p, title = "CPI for Meat, Eggs, and Pork", 
+            xaxis = list(title = "Item", tickvals = c(2010, 2012, 2014, 2016, 2018, 2020), 
+                         ticktext = c("Beef and Veal", "Eggs", "Pork")), 
+            yaxis = list(title = "Price Index"))
+
+# Display plot
+p
 
 ```
+
