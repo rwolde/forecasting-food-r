@@ -90,9 +90,8 @@ meat_eggs_pork <- gather(meat_eggs_pork, key = "Year", value = "Price_Index", -c
 
 meat_eggs_pork$Price_Index <- as.numeric(meat_eggs_pork$Price_Index)
 
+### Adjusted data from 2000 to 2010
 meat_eggs_pork <- meat_eggs_pork[meat_eggs_pork$Year >= 2000 & meat_eggs_pork$Year <= 2010,]
-
-
 
 # Create plotly object
 p <- plot_ly(data = meat_eggs_pork, x = ~Year, y = ~Price_Index, color = ~`Consumer Price Index item`, type = "scatter", mode = "lines+markers") 
