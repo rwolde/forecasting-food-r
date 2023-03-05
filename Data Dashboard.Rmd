@@ -78,7 +78,7 @@ p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
 library(plotly)
 library(readxl)
 library(tidyr)
-
+library(plotly)
 
 # Read in CPI data
 CPIHistoricalData <- read_excel("historicalcpi.xlsx", skip = 1)
