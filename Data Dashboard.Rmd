@@ -1,6 +1,6 @@
 ---
 title: "Forecasting food"
-author: "Nickolas Tran"
+author: "Nickolas Tran and Rim Wolde"
 date: "2023-02-22"
 output: html_document
 runtime: shiny
