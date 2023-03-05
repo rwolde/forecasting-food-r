@@ -7,10 +7,6 @@ runtime: shiny
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-install.packages("tidyverse")
-install.packages("xlsx")
-install.packages("readxl")
-install.packages("plotly")
 ```
 
 ```{r load data, include=FALSE}
@@ -102,5 +98,6 @@ p <- layout(p, title = "CPI for Meat, Eggs, and Chicken",
             xaxis = list(title = "Year"), 
             yaxis = list(title = "Price Index"))
 
+p
 ```
 
