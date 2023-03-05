@@ -99,6 +99,8 @@ p <- layout(p, title = "CPI for Meat, Eggs, and Chicken",
             xaxis = list(title = "Year"), 
             yaxis = list(title = "Price Index"))
 
+# Displays plot
 p
+
 ```
 
