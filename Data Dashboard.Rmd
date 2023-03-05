@@ -92,6 +92,8 @@ p <- plot_ly(data = meat_eggs_pork, x = ~Year, y = ~Price_Index, color = ~`Consu
 p <- layout(p, title = "CPI for Meat, Eggs, and Chicken", 
             xaxis = list(title = "Year"), 
             yaxis = list(title = "Price Index"))
+
+# Displays plot
 p
 
 ```
