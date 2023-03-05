@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 install.packages("tidyverse")
 install.packages("xlsx")
 install.packages("readxl")
+install.packages("plotly")
 ```
 
 ```{r load data, include=FALSE}
