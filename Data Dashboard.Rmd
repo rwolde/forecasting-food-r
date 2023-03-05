@@ -94,6 +94,5 @@ p <- layout(p, title = "CPI for Meat, Eggs, and Chicken",
             yaxis = list(title = "Price Index"))
 p
 
-p
 ```
 
