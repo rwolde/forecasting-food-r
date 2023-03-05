@@ -17,7 +17,9 @@ CPIHistoricalData <- read_excel("historicalcpi.xlsx",
                                 skip = 1)
 ```
 
-## bar graph is trying to show changes and compares foods together
+## Bar graph
+Details here...
+
 
 ``` {r bar graph, echo=FALSE}
 
@@ -46,10 +48,10 @@ ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`An
 ```
 
 ## Overall increase in food in general seperate year/decade etc
+Details here...
 
-##Overall increase in food and we can try to highlight foods on plot
 
-``` {r point graph}
+``` {r point graph, echo=FALSE}
 
 p <- ggplot(data = CPIHistoricalData,
             mapping = aes(x = 1974,
@@ -64,7 +66,11 @@ p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
        caption = "Source: CPIForecastData")
 ```
 
-``` {r interactive line graph}
+
+## Interactive graph
+Details here...
+
+``` {r interactive line graph, echo=FALSE}
 
 library(plotly)
 library(readxl)
