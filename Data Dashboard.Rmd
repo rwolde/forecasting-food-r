@@ -72,7 +72,7 @@ p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
        caption = "Source: CPIForecastData")
 ```
 
-``` {interactive line graph}
+``` {r interactive line graph}
 
 library(plotly)
 library(readxl)
@@ -100,10 +100,6 @@ p <- plot_ly(data = meat_eggs_pork, x = ~Year, y = ~Price_Index, color = ~`Consu
 p <- layout(p, title = "CPI for Meat, Eggs, and Chicken", 
             xaxis = list(title = "Year"), 
             yaxis = list(title = "Price Index"))
-
-
-# Display plot
-p
 
 ```
 
