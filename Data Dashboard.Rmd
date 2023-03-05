@@ -20,7 +20,6 @@ CPIHistoricalData <- read_excel("historicalcpi.xlsx",
 ## Bar graph
 Details here...
 
-
 ``` {r bar graph, echo=FALSE}
 
   library(ggplot2)
