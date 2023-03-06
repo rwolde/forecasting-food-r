@@ -18,7 +18,8 @@ CPIHistoricalData <- read_excel("historicalcpi.xlsx",
 ```
 
 ## Bar graph
-Details here...
+
+This graph is showing the forecast data for the year 2022 and the graph is showing the overall percentage changes for each food item.
 
 ``` {r bar graph, echo=FALSE}
 
@@ -48,7 +49,8 @@ ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`An
 
 
 ## Interactive graph
-Details here...
+
+This interactive graph is showing the percentage changes of the price index for beef and veal, eggs and pork from the years 2000 to 2010. 
 
 ``` {r interactive line graph, echo=FALSE}
 
