@@ -7,11 +7,6 @@ runtime: shiny
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-<<<<<<< HEAD
-install.packages("scatterplot3d")
-=======
-install.packages("ggplot2")
->>>>>>> 1237910814d1e2696708fddc05b3153efc4a8982
 ```
 
 ```{r load data, include=FALSE}
