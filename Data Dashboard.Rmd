@@ -91,5 +91,4 @@ library(scatterplot3d)
 attach(mtcars)
 scatterplot3d(wt,disp,mpg, pch=16, highlight.3d=TRUE,
   type="h", main="3D Scatterplot")
-
 ```
