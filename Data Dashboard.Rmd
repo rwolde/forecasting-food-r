@@ -7,6 +7,7 @@ runtime: shiny
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+install.packages("scatterplot3d")
 ```
 
 ```{r load data, include=FALSE}
@@ -44,25 +45,6 @@ ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`An
   labs(title="2022 Forecasted percent change of food prices", x="Food Item", y="Percent change") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-```
-
-## Overall increase in food in general seperate year/decade etc
-Details here...
-
-
-``` {r point graph, echo=FALSE}
-
-p <- ggplot(data = CPIHistoricalData,
-            mapping = aes(x = 1974,
-                          y = 1974))
-                          
-p + geom_point(data = CPIHistoricalData , mapping = aes(color = "continent",
-                          fill = "continent")) +
-  geom_smooth(method = "loess") +
-  labs(x = "Food...", 
-       y = "Price", 
-       title = "Food price change over ... years",
-       caption = "Source: CPIForecastData")
 ```
 
 
@@ -103,3 +85,11 @@ p
 
 ```
 
+``` {r 3d scatter plot with regression line, echo=FALSE}
+
+# 3D Scatterplot with Coloring and Vertical Drop Lines
+library(scatterplot3d)
+attach(mtcars)
+scatterplot3d(wt,disp,mpg, pch=16, highlight.3d=TRUE,
+  type="h", main="3D Scatterplot")
+```
