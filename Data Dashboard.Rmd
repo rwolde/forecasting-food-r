@@ -1,13 +1,17 @@
 ---
 title: "Forecasting food"
-author: "Nickolas Tran"
+author: "Nickolas Tran and Rim Wolde"
 date: "2023-02-22"
 output: html_document
 runtime: shiny
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+<<<<<<< HEAD
 install.packages("scatterplot3d")
+=======
+install.packages("ggplot2")
+>>>>>>> 1237910814d1e2696708fddc05b3153efc4a8982
 ```
 
 ```{r load data, include=FALSE}
