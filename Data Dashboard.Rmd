@@ -59,43 +59,10 @@ ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`An
 
 ## Interactive graph
 
-This interactive graph is showing the percentage changes of the price index for beef and veal, eggs and pork from the years 2000 to 2010. 
+This interactive graph is showing the percentage changes of the price index for beef and veal, eggs and pork throughout decades. 
 
-``` {r interactive line graph, echo=FALSE, message=FALSE}
 
-library(plotly)
-library(readxl)
-library(tidyr)
-library(plotly)
-
-# Read in CPI data
-CPIHistoricalData <- read_excel("historicalcpi.xlsx", skip = 1)
-
-# Subset the data to only include meat, eggs, and chicken
-meat_eggs_pork <- CPIHistoricalData[CPIHistoricalData$`Consumer Price Index item` %in% c("Beef and veal", "Eggs", "Pork"),]
-
-# Transform the data into long format
-meat_eggs_pork <- gather(meat_eggs_pork, key = "Year", value = "Price_Index", -c(`Consumer Price Index item`))
-
-meat_eggs_pork$Price_Index <- as.numeric(meat_eggs_pork$Price_Index)
-
-### Adjusted data from 2000 to 2010
-meat_eggs_pork <- meat_eggs_pork[meat_eggs_pork$Year >= 2000 & meat_eggs_pork$Year <= 2010,]
-
-# Create plotly object
-p <- plot_ly(data = meat_eggs_pork, x = ~Year, y = ~Price_Index, color = ~`Consumer Price Index item`, type = "scatter", mode = "lines+markers") 
-
-# Customize layout
-p <- layout(p, title = "CPI for Meat, Eggs, and Chicken", 
-            xaxis = list(title = "Year"), 
-            yaxis = list(title = "Price Index"))
-
-# Displays plot
-p
-
-```
-
-``` {r interactive scatterplot}
+``` {r interactive line graph with dropbox}
 library(shiny)
 library(plotly)
 library(readxl)
