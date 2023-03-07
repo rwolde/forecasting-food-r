@@ -95,11 +95,60 @@ p
 
 ```
 
-``` {r 3d scatter plot with regression line, echo=FALSE, message=FALSE}
+``` {r interactive scatterplot}
+library(shiny)
+library(plotly)
+library(readxl)
+library(tidyr)
 
-# 3D Scatterplot with Coloring and Vertical Drop Lines
-library(scatterplot3d)
-attach(mtcars)
-scatterplot3d(wt,disp,mpg, pch=16, highlight.3d=TRUE,
-  type="h", main="3D Scatterplot")
+# Read in CPI data
+CPIHistoricalData <- read_excel("historicalcpi.xlsx", skip = 1)
+
+# Subset the data to only include meat, eggs, and chicken
+meat_eggs_pork <- CPIHistoricalData[CPIHistoricalData$`Consumer Price Index item` %in% c("Beef and veal", "Eggs", "Pork"),]
+
+# Transform the data into long format
+meat_eggs_pork <- gather(meat_eggs_pork, key = "Year", value = "Price_Index", -c(`Consumer Price Index item`))
+
+meat_eggs_pork$Price_Index <- as.numeric(meat_eggs_pork$Price_Index)
+
+# Define color palette for each category in the Consumer Price Index item column
+colors <- c("Beef and veal" = "firebrick3", "Eggs" = "darkcyan", "Pork" = "darkseagreen3")
+
+# Define UI
+ui <- fluidPage(
+  
+  # Add dropdown for selecting the meat type
+  selectInput("meat_type", label = "Select meat type:", 
+              choices = c("Beef and veal", "Eggs", "Pork"),
+              selected = "Beef and veal"),
+  
+  # Add plotly output
+  plotlyOutput("plot")
+)
+
+# Define server
+server <- function(input, output) {
+  
+  # Filter data based on selected meat type
+  filtered_data <- reactive({
+    meat_eggs_pork[meat_eggs_pork$`Consumer Price Index item` == input$meat_type,]
+  })
+  
+  # Create plotly object
+  output$plot <- renderPlotly({
+    p <- plot_ly(data = filtered_data(), x = ~Year, y = ~Price_Index, color = ~`Consumer Price Index item`, colors = colors, type = "scatter", mode = "lines+markers") 
+    
+    # Customize layout
+    p <- layout(p, title = "CPI for Meat, Eggs, and Pork", 
+                xaxis = list(title = "Year"), 
+                yaxis = list(title = "Price Index"))
+    
+    # Return plot
+    p
+  })
+}
+
+# Run app
+shinyApp(ui, server)
 ```
