@@ -96,7 +96,7 @@ ui <- fluidPage(
               min = min(as.numeric(meat_eggs_pork$Year)), 
               max = max(as.numeric(meat_eggs_pork$Year)), 
               value = c(min(as.numeric(meat_eggs_pork$Year)), max(as.numeric(meat_eggs_pork$Year))),
-              step = 1), 
+              step = 1, ticks=FALSE, sep=""), 
   
   # Add plotly output
   plotlyOutput("plot")
