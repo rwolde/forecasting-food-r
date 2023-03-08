@@ -90,6 +90,14 @@ ui <- fluidPage(
               choices = c("Beef and veal", "Eggs", "Pork"),
               selected = "Beef and veal"),
   
+    # Add slider for selecting the year range
+  sliderInput("year_range", label = "Select year range:",
+              min = min(as.numeric(meat_eggs_pork$Year)), 
+              max = max(as.numeric(meat_eggs_pork$Year)), 
+              value = c(min(as.numeric(meat_eggs_pork$Year)), max(as.numeric(meat_eggs_pork$Year))),
+              step = 1),
+  
+  
   # Add plotly output
   plotlyOutput("plot")
 )
@@ -102,6 +110,7 @@ server <- function(input, output) {
     meat_eggs_pork[meat_eggs_pork$`Consumer Price Index item` == input$meat_type,]
   })
   
+
   # Create plotly object
   output$plot <- renderPlotly({
     p <- plot_ly(data = filtered_data(), x = ~Year, y = ~Price_Index, color = ~`Consumer Price Index item`, colors = colors, type = "scatter", mode = "lines+markers") 
