@@ -57,7 +57,7 @@ ggplot(data = CPIForecastData_complete, aes(x=`Consumer Price Index item`, y=`An
 ```
 
 
-## Interactive graph
+## Interactive line graph
 
 This interactive graph is showing the percentage changes of the price index for beef and veal, eggs and pork throughout decades. 
 
